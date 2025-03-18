@@ -8,8 +8,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
 <body>
-  <?php require_once'include/database.php';?>
-<?php include_once'include/nav.php'; ?>
+  <?php require_once'./database.php';?>
+<?php include_once'./nav.php'; ?>
 <?php 
 if(isset($_POST ['ajouter'])){
 
@@ -17,7 +17,7 @@ if(isset($_POST ['ajouter'])){
   if(!empty($t)){
   
     
-    $req="insert into items values(null,?)";
+    $req = "INSERT INTO items (title) VALUES (?)"; 
     $stat=$pdo->prepare($req);
     $stat->execute([$t]);
   }
@@ -73,7 +73,6 @@ $items=$sqlstat->fetchAll(PDO::FETCH_ASSOC);
   <td>
   <form method="post">
       <input type="hidden" name="id" value="<?php echo $item['id'] ?>">
-      <input formaction="modifier.php" class='btn btn-sm rounded-3 btn-primary' type="submit" value="&#9999;" name="modifier">
       <input formaction="supprimer.php" class='btn btn-sm rounded-3 btn-danger' type="submit" value="&#10008;" name="supprimer" onclick="return confirm('Voulez-vous vraiment supprimer <?php echo $item['title'] ?> ???');">
     </form>
   </td>
